@@ -1,0 +1,16 @@
+/*
+základní syntaxe CSS
+selector{
+vlastnost-1:hodnota;
+vlastnost-1:hodnota;
+vlastnost-1:hodnota;
+vlastnost-1:hodnota;
+}
+
+
+*/
+
+body{
+    background-color: aquamarine;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
