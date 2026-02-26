@@ -15,7 +15,82 @@ body{
     font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
+h1 {
+    font-size: 30px;
+    color: aliceblue;
+    margin: unset;
+}
+
 p{
+    
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-size: 1rem;
+}
+
+header, footer {
+    background-color: grey;
+    padding: 0.5rem 1.5rem 2rem; /*1rem = 16px*/
+    padding: 0.5rem; 
+    padding: 2.5rem; 
+    padding: 0.5rem; 
+    border-radius: 10px;
+    margin: 40px;
+    
+
+}
+
+footer p{
+    margin: unset;
+
+}
+
+.page-wrapper{
+    width: 50%;
+    /*zarovnani*/
+    margin: 0 auto;
+}
+
+
+nav a{
+    display: block;
+    background-color: azure;
+    color: black;
+    text-decoration: none;
+    padding: 0.5rem;
+    border-radius: 10px;
+    margin: 0.5rem;
+
+}
+
+nav ul{
+    display: flex;
+    list-style-type: none;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    padding: 0;
+}
+
+nav li{
+    /*
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 100px;
+    */
+    flex: 1 1 100px;
+
+}
+
+.grid-container{
+
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+}
+
+article.card{
+    background-color: hsl(34, 100%, 92%);
+    padding: 1rem;
+    border-radius: 10px 40px;
+    border: 3px dotted orange;
+    margin: 16px;
 }
