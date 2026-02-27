@@ -3,17 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles/style.css">
+    <!--link rel="stylesheet" href="styles/style.css"-->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <title>Web 01 - Janoušek</title>
+    <style type="text/tailwindcss">
+      @theme {
+        --color-myPrimaryColor: #de378d;
+      }
+
+      @layer base {
+        h2{
+            @apply text-2xl 
+        }
+
+        p{
+            @apply text-xs font-serif mt-2 
+        }
+
+        .card{
+            @apply bg-teal-800 p-5 rounded-xl
+        }
+
+        nav a{
+            @apply
+            block
+            bg-teal-600
+            text-white
+            rounded-md
+            py-2
+            px-4
+            text-center
+            no-underline
+            whitespace-nowrap
+            hover:bg-blue-200
+        }
+
+        nav li{
+            @apply flex-grow basis-full
+
+        }
+      }
+      </style>
 </head>
 
-<body>
-    <div class="page_wrapper">
-        <header>
-            <h1>WA 2026 první web</h1>
+<body class="bg-green-200 text-lime-500">
+    <div class="page_wrapper w-[95%] mx-auto lg:w[80%]">
+        <header class="bg-myPrimaryColor ">
+            <h1 class="text-4xl" >WA 2026 první web</h1>
         </header>
-        <nav>
-            <ul>
+        <nav class="my-8">
+            <ul class="flex gap-3">
                 <li><a href="index.html">Domů</a></li>
                 <li><a href="#">O nás</a></li>
                 <li><a href="#">Kontakt</a></li>
@@ -22,9 +61,9 @@
             </ul>
         </nav>
         <main>
-            <section class="grid-container">
+            <section class="grid gap-8 grid-cols-[repeat(auto-fit,minmax(200px,1fr))]">
                 <article class="card">
-                    <h2>titulek</h2>
+                    <h2 class="text-2xl">titulek</h2>
                     <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Similique voluptates tempora praesentium dolorum sequi commodi facere, adipisci sunt ex, vel quam illum. Velit fuga delectus quidem. Quae quia alias recusandae?</b></p>
                 </article>
                   <article class="card">
@@ -38,7 +77,6 @@
                   <article class="card">
                     <h2>titulek</h2>
                     <p><em>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Similique voluptates tempora praesentium dolorum sequi commodi facere, adipisci sunt ex, vel quam illum. Velit fuga delectus quidem. Quae quia alias recusandae?</em></p>
-                </article>
                 </article>
                   <article class="card">
                     <h2>titulek</h2>
@@ -58,7 +96,7 @@
 
 
 
-        <footer>
+        <footer class="bg-myPrimaryColor px-4 py-6 text center">
             <p>&copy;WA vgjvjh hvjjhvvbjkkjbv uvvvjhhjvkvjh gcckghccvz &nbsp;2026 Šimon Janoušek</p>
         </footer>
 
