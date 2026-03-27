@@ -1,5 +1,3 @@
-
-
 <?php
 
 // __DIR__ je cesta k aktuální složce (app/controllers)
