@@ -42,4 +42,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SESSION['user_id'])) {
     // Pokud někdo přistoupí přímo na skript bez POSTu, hodíme ho na index
     header("Location: ../index.php");
     exit();
+    
 }
