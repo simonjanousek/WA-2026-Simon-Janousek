@@ -109,19 +109,20 @@ include 'includes/header.php';
                             <td style="padding: 18px;">
                                 <div style="display: flex; gap: 8px; justify-content: center;">
                                     
-                                    <a href="edit_reservation.php?res_id=<?= $res['id']; ?>" class="btn" style="padding: 6px 12px; background: #3498db; color: white; text-decoration: none; border-radius: 4px; font-size: 0.8rem;">
+                                    <a href="edit_reservation.php?res_id=<?= $res['id']; ?>" class="btn" style="padding: 6px 12px; background: #c7e9ff; color: #0b588b; text-decoration: none; border-radius: 4px; font-size: 0.8rem;">
                                         ⚙️ Spravovat
                                     </a>
 
                                     <?php if ($role === 'admin' || $role === 'editor'): ?>
-                                        <a href="rebook.php?res_id=<?= $res['id']; ?>" class="btn" style="padding: 6px 12px; font-size: 0.8rem; background: #e67e22; text-decoration: none; color: white; border-radius: 4px;">
+                                        <a href="rebook.php?res_id=<?= $res['id']; ?>" class="btn" style="padding: 6px 12px; font-size: 0.8rem; background: #ffba7d; text-decoration: none; color: #b96600; border-radius: 4px;">
                                             🔄 Rebook
                                         </a>
                                     <?php endif; ?>
 
                                     <?php if ($role === 'admin'): ?>
-                                        <a href="admin/delete_reservation.php?id=<?= $res['id']; ?>" class="btn" style="padding: 6px 12px; font-size: 0.8rem; background: #e74c3c; text-decoration: none; color: white; border-radius: 4px;" onclick="return confirm('Opravdu smazat?')">
-                                            🗑️
+                                        <a href="admin/delete_reservation.php?id=<?= $res['id']; ?>" class="btn" style="padding: 6px 12px; font-size: 0.8rem; background: #f88f84; text-decoration: none; color: #d23726; border-radius: 6px;" onclick="return confirm('Opravdu smazat?')">
+
+                                            Smazat
                                         </a>
                                     <?php endif; ?>
                                 </div>

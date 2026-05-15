@@ -29,14 +29,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_rebook'])) {
 
         $new_info = "REBOOKED: " . $nf['airline_name'] . " | " . $nf['destination_from'] . " -> " . $nf['destination_to'] . " (" . date('d.m. H:i', strtotime($nf['departure_time'])) . ")";
 
-        // Update v DB
-        $update = $pdo->prepare("UPDATE reservations SET flight_info = ?, price_paid = ? WHERE id = ?");
-        $update->execute([$new_info, $nova_cena, $res_id]);
+      
+        // Update v DB - PŘIDÁME RESET STAVU NA 'Potvrzeno'
+$update = $pdo->prepare("UPDATE reservations SET flight_info = ?, price_paid = ?, status = 'Potvrzeno' WHERE id = ?");
+$update->execute([$new_info, $nova_cena, $res_id]);
 
         // Zápis do historie
         $log_details = "Původní cena: $stara_cena Kč -> Nová cena: $nova_cena Kč. ($diff_text). Let změněn na: $new_info";
         logChange($pdo, $res_id, $_SESSION['user_id'], "Rebooking", $log_details);
-
+        
         header("Location: ../edit_reservation.php?res_id=$res_id&msg=updated");
         exit();
     }

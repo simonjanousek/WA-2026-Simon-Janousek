@@ -19,14 +19,18 @@ $old_res = $stmt->fetch();
 $search_to = $_GET['search_to'] ?? '';
 
 // 4. Načtení dostupných letů pro tabulku
+// 4. Načtení dostupných letů pro tabulku (POUZE AKTIVNÍ A BUDOUCÍ)
 $sql = "SELECT f.*, a.name as airline_name 
         FROM flights f 
         JOIN airlines a ON f.airline_id = a.id 
-        WHERE 1=1";
+        WHERE f.status = 'Aktivní' 
+        AND f.departure_time > NOW()"; // Ukáže jen lety, které ještě neodletěly
 
 if (!empty($search_to)) {
+    // Používáme připravený parametr pro bezpečnost (quote už máš, tak to zachováme)
     $sql .= " AND (f.destination_to LIKE " . $pdo->quote("%$search_to%") . " OR f.destination_from LIKE " . $pdo->quote("%$search_to%") . ")";
 }
+
 $sql .= " ORDER BY f.departure_time ASC";
 $available_flights = $pdo->query($sql)->fetchAll();
 
