@@ -3,177 +3,226 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aplikace Knihovna</title>
+    <title>Seznam knih | Knihovna</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
     <style>
         :root {
             --primary: #4f46e5;
+            --primary-hover: #4338ca;
             --primary-light: #eef2ff;
             --text-main: #1e293b;
             --text-muted: #64748b;
             --bg: #f8fafc;
             --white: #ffffff;
             --border: #e2e8f0;
+            
+            /* Tvoje barvy pro texty */
+            --emerald-600: #059669; /* Úprava na tmavší zelenou pro čitelnost na bílé */
+            --slate-500: #64748b;
+            --slate-700: #334155;
         }
 
         body {
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            font-family: 'Inter', system-ui, sans-serif;
             background-color: var(--bg);
             color: var(--text-main);
             margin: 0;
             line-height: 1.5;
         }
 
-        header {
-            background: var(--white);
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid var(--border);
-            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
-        }
-
-        header h1 {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--primary);
-            margin: 0;
-        }
-
-        nav ul {
-            list-style: none;
-            display: flex;
-            gap: 1.5rem;
-            margin: 0;
-        }
-
-        nav a {
-            text-decoration: none;
-            color: var(--text-muted);
-            font-weight: 500;
-            font-size: 0.9rem;
-            transition: all 0.2s;
-        }
-
-        nav a:hover {
-            color: var(--primary);
-        }
-
         main {
-            max-width: 1000px;
-            margin: 3rem auto;
+            max-width: 1200px;
+            margin: 2.5rem auto;
             padding: 0 1.5rem;
+            animation: fadeIn 0.5s ease-out;
         }
 
-        h2 {
-            font-size: 1.875rem;
-            font-weight: 700;
-            letter-spacing: -0.025em;
-            margin-bottom: 0.5rem;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        main p {
-            color: var(--text-muted);
-            margin-bottom: 2rem;
-        }
+        .header-section { margin-bottom: 2rem; }
+        h2 { font-size: 2rem; font-weight: 800; color: var(--text-main); margin: 0; letter-spacing: -0.025em; }
+        .description { color: var(--text-muted); margin: 0.5rem 0 0 0; font-size: 1.1rem; }
 
-        /* Moderní pojetí tabulky */
+        /* --- Tabulka --- */
         .table-container {
             background: var(--white);
-            border-radius: 1rem;
+            border-radius: 1.25rem;
             border: 1px solid var(--border);
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
             overflow: hidden;
         }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            text-align: left;
-        }
+        table { width: 100%; border-collapse: collapse; text-align: left; }
 
         th {
-            background: var(--bg);
-            padding: 1rem 1.5rem;
+            background: #fcfcfd;
+            padding: 1.25rem 1.5rem;
             font-size: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 0.05em;
-            font-weight: 600;
+            font-weight: 700;
             color: var(--text-muted);
             border-bottom: 1px solid var(--border);
         }
 
         td {
-            padding: 1.25rem 1.5rem;
-            font-size: 0.95rem;
+            padding: 1rem 1.5rem;
             border-bottom: 1px solid var(--border);
+            vertical-align: middle;
         }
 
-        tr:last-child td {
-            border-bottom: none;
+        /* Pomocné třídy pro tvůj styl */
+        .text-slate-300 { color: var(--slate-700); } /* Na bílém pozadí musí být slate tmavší */
+        .text-emerald-400 { color: var(--emerald-600); } 
+        .text-slate-400 { color: var(--text-muted); }
+        .font-medium { font-weight: 500; }
+        .font-mono { font-family: ui-monospace, SFMono-Regular, monospace; }
+        .px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+        .py-4 { padding-top: 1rem; padding-bottom: 1rem; }
+
+        tbody tr:hover { background-color: #fcfdfe; }
+
+        /* --- Obrázky --- */
+        .img-cell { width: 80px; }
+        .book-thumbnail {
+            width: 70px;
+            height: auto;
+            border-radius: 6px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--border);
+            display: block;
         }
 
-        tbody tr:hover {
-            background-color: var(--primary-light);
-            transition: background 0.2s;
+        .no-photo {
+            width: 70px;
+            aspect-ratio: 2/3;
+            background: #f1f5f9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.65rem;
+            color: #94a3b8;
+            border-radius: 6px;
+            border: 1px dashed #cbd5e1;
+            text-align: center;
+            font-weight: 600;
         }
 
-        /* Badge pro cenu */
+        .book-title { font-weight: 700; color: var(--text-main); font-size: 1.05rem; }
+
+        /* --- Akce --- */
         .price-badge {
             background: var(--primary-light);
             color: var(--primary);
-            padding: 0.25rem 0.75rem;
-            border-radius: 9999px;
-            font-weight: 600;
-            font-size: 0.875rem;
-            display: inline-block;
+            padding: 0.4rem 0.8rem;
+            border-radius: 2rem;
+            font-weight: 700;
+            font-size: 0.85rem;
+            white-space: nowrap;
         }
 
-        footer {
-            text-align: center;
-            padding: 3rem;
-            color: var(--text-muted);
-            font-size: 0.875rem;
+        .actions-flex { display: flex; gap: 0.5rem; justify-content: flex-end; }
+        .btn-action {
+            text-decoration: none;
+            font-size: 0.75rem;
+            padding: 0.5rem 0.9rem;
+            border-radius: 0.6rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            transition: all 0.2s;
         }
+        .btn-detail { background: #f1f5f9; color: #475569; }
+        .btn-edit { background: #fef3c7; color: #92400e; }
+        .btn-delete { background: #fee2e2; color: #b91c1c; }
+
+        footer { text-align: center; padding: 4rem 2rem; color: var(--text-muted); font-size: 0.9rem; }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Aplikace knihovna</h1>
-        <nav>
-            <ul>
-                <li><a href="index.php?url=book/index">seznam knih (domů)</a></li>
-                <li><a href="index.php?url=book/create">přidat novou knihu</a></li>
-            </ul>
-        </nav>
-    </header>
+
+<?php require_once '../app/views/layout/header.php'; ?>
 
 <main>
-    <h2>Dostupné knihy</h2>
-    <p>Zde se objeví seznam knih načtených z databáze</p>
+    <div class="header-section">
+        <h2>Dostupné knihy</h2>
+        <p class="description">Kompletní přehled titulů s dynamickým náhledem obálek.</p>
+    </div>
     
     <div class="table-container">
         <table>
             <thead>
                 <tr>
-                    <th>Název</th>
-                    <th>Autor</th>
-                    <th>ISBN</th>
-                    <th>Cena</th>
+                    <th class="img-cell">Obálka</th>
+                    <th class="px-6 py-4">Název knihy</th>
+                    <th class="px-6 py-4">Autor</th>
+                    <th class="px-6 py-4">Kategorie</th>
+                    <th class="px-6 py-4">Rok</th>
+                    <th class="px-6 py-4">Cena</th>
+                    <th style="text-align: right;">Akce</th>
                 </tr>
             </thead>
             <tbody>
                 <?php foreach ($books as $book): ?>
-                    <tr>
-                        <td style="font-weight: 500;"><?= htmlspecialchars($book['title']) ?></td>
-                        <td style="color: var(--text-muted);"><?= htmlspecialchars($book['author']) ?></td>
-                        <td style="font-family: monospace; font-size: 0.85rem;"><?= htmlspecialchars($book['isbn']) ?></td>
-                        <td>
-                            <span class="price-badge">
-                                <?= str_replace('.', ',', htmlspecialchars($book['price'])) ?> Kč
-                            </span>
-                        </td>
-                    </tr>
+                <tr>
+                    <td class="img-cell">
+                        <?php 
+                            $images = json_decode($book['images'], true);
+                            if (!empty($images) && isset($images[0])): 
+                                $imgName = htmlspecialchars($images[0]);
+                        ?>
+                                <img src="public/uploads/<?= $imgName ?>" class="book-thumbnail" onerror="this.src='uploads/<?= $imgName ?>'">
+                            <?php else: ?>
+                                <div class="no-photo">NENÍ<br>FOTO</div>
+                            <?php endif; 
+                        ?>
+                    </td>
+
+                    <td class="px-6 py-4">
+                        <span class="book-title"><?= htmlspecialchars($book['title']) ?></span>
+                    </td>
+
+                    <td class="px-6 py-4 text-slate-300">
+                        <?= htmlspecialchars($book['author']) ?>
+                    </td>
+
+                    <td class="px-6 py-4 text-emerald-400 font-medium">
+                        <?= htmlspecialchars($book['category_name'] ?? 'Nezařazeno') ?>
+                    </td>
+
+                    <td class="px-6 py-4 text-slate-400 font-mono">
+                        <?= htmlspecialchars($book['year']) ?>
+                    </td>
+
+                    <td class="px-6 py-4">
+                        <span class="price-badge">
+                            <?= number_format($book['price'], 2, ',', ' ') ?> Kč
+                        </span>
+                    </td>
+
+                    <td class="px-6 py-4">
+                        <div class="actions-flex">
+                            <a href="index.php?url=book/show/<?= $book['id'] ?>" class="btn-action btn-detail">Detail</a>
+                            
+                            <?php 
+                            $isAdmin = isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == 1;
+                            $isOwner = isset($_SESSION['user_id']) && isset($book['created_by']) && $_SESSION['user_id'] == $book['created_by'];
+
+                            if ($isOwner || $isAdmin): 
+                            ?>
+                                <a href="index.php?url=book/edit/<?= $book['id'] ?>" class="btn-action btn-edit">Upravit</a>
+                                <a href="index.php?url=book/delete/<?= $book['id'] ?>" 
+                                   onclick="return confirm('Opravdu chcete tuto knihu smazat?')" 
+                                   class="btn-action btn-delete">Smazat</a>
+                            <?php endif; ?>
+                        </div>
+                    </td>
+                </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
@@ -181,7 +230,8 @@
 </main>
 
 <footer>
-    <p>&copy; WA 2026 - výukový projekt</p>
+    <p>&copy; 2026 Knihovna - Simon Janoušek</p>
 </footer>
+
 </body>
 </html>
