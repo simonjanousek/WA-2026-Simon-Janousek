@@ -1,0 +1,176 @@
+/* --- TRIPDESK UNIFIED DESIGN SYSTEM --- */
+
+/* Definice hlavních barev - ladí s logem */
+:root {
+    --primary: #1A365D;    /* Námořnická modř */
+    --secondary: #38B2AC;  /* Tyrkysová */
+    --success: #48BB78;    /* Zelená */
+    --accent: #e67e22;     /* Oranžová pro drobné detaily */
+    --bg-light: #f7fafc;   /* Velmi světle šedé pozadí */
+    --white: #ffffff;
+    --text-dark: #2d3748;
+    --border: #e2e8f0;
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+/* Základní nastavení */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+    line-height: 1.6;
+    margin: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Nadpisy */
+h1, h2, h3 {
+    color: var(--primary);
+    font-weight: 700;
+}
+
+/* Karty a boxy (Všechny tabulky a formuláře v nich budou vypadat skvěle) */
+.airline-card, .checkin-card, .card {
+    background: var(--white);
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    margin-bottom: 25px;
+}
+
+/* Tlačítka - jednotný styl */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: var(--primary);
+    color: var(--white);
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: center;
+}
+
+.btn:hover {
+    filter: brightness(1.2);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.btn-secondary { background-color: var(--secondary); }
+.btn-success { background-color: var(--success); }
+
+/* Tabulky - moderní vzhled bez mřížek */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--white);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-top: 15px;
+}
+
+th {
+    background-color: var(--primary);
+    color: var(--white);
+    padding: 15px;
+    text-align: left;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+td {
+    padding: 15px;
+    border-bottom: 1px solid var(--border);
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+tr:hover {
+    background-color: #f8fafc;
+}
+
+/* Formuláře */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="file"],
+select,
+textarea {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+input:focus {
+    border-color: var(--secondary);
+    box-shadow: 0 0 0 3px rgba(56, 178, 172, 0.1);
+}
+
+/* Historie změn (Timeline v edit_reservation.php) */
+.timeline-item {
+    padding-left: 20px;
+    border-left: 3px solid var(--secondary);
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.timeline-item::before {
+    content: "";
+    position: absolute;
+    left: -9px;
+    top: 0;
+    width: 15px;
+    height: 15px;
+    background: var(--secondary);
+    border-radius: 50%;
+    border: 3px solid var(--white);
+}
+
+/* Responzivita pro mobily */
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        padding: 15px;
+    }
+    
+    nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 15px;
+        gap: 10px;
+    }
+    
+    .container {
+        padding: 10px;
+    }
+}
+.airline-logo-small {
+    width: 60px;
+    height: 60px;
+    object-fit: contain; /* Tohle zajistí, že se logo nedeformuje */
+    background: #f8fafc;
+    padding: 5px;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+}

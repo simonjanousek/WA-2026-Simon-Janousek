@@ -1,0 +1,12 @@
+<svg width="250" height="70" viewBox="0 0 250 70" xmlns="http://www.w3.org/2000/svg">
+  <path d="M10 55 Q 20 55, 30 40" stroke="#48BB78" stroke-width="2" fill="none" stroke-dasharray="4,2" opacity="0.5"/>
+
+  <path d="M25 40 L60 12 L53 35 Z" fill="#38B2AC"/>
+  <path d="M25 40 L53 35 L60 42 L25 40 Z" fill="#1A365D"/>
+  
+  <path d="M60 12 L53 35 L61 16 Z" fill="#48BB78"/>
+
+  <text x="75" y="48" font-family="'Open Sans', sans-serif" font-size="34" font-weight="bold" fill="#1A365D">
+    Trip<tspan fill="#38B2AC">Desk</tspan>
+  </text>
+</svg>
