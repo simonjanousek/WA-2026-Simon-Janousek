@@ -1,5 +1,5 @@
 <?php
-// 1. Připojení k DB - skáčeme ze složky actions/ o úroveň výš
+// 1. Připojení k DB ze složky actions/ o úroveň výš
 require_once '../includes/db.php';
 session_start();
 
@@ -39,8 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SESSION['user_id'])) {
     }
 
 } else {
-    // Pokud někdo přistoupí přímo na skript bez POSTu, hodíme ho na index
+    // Pokud někdo přistoupí přímo na skript bez POSTu, vraceni na index
     header("Location: ../index.php");
     exit();
-    
 }

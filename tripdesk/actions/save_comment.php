@@ -1,5 +1,5 @@
 <?php
-// 1. Připojení k DB - skáčeme ze složky actions/ o úroveň výš
+// 1. Připojení k DB -  ze složky actions/ o úroveň výš
 require_once '../includes/db.php';
 session_start();
 

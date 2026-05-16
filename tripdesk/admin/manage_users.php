@@ -2,7 +2,7 @@
 require_once '../includes/db.php';
 session_start();
 
-// 1. Ochrana: Jen admin sem může
+// 1. Ochrana: Jen admin 
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
     die("Nepovolený přístup.");
 }
@@ -14,7 +14,7 @@ if (isset($_POST['update_role'])) {
     $u_id = $_POST['user_id'];
     $new_role = $_POST['role'];
     
-    // Pojistka: Admin si nemůže sám sobě sebrat práva admina (aby se nezablokoval)
+    // Admin si nemůže sám sobě sebrat práva admina (aby se nezablokoval)
     if ($u_id == $_SESSION['user_id'] && $new_role !== 'admin') {
         $msg = "Chyba: Nemůžete si sami změnit roli z Admina na nižší.";
     } else {

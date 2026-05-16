@@ -2,7 +2,7 @@
 require_once 'includes/db.php';
 session_start();
 
-// 1. Ochrana: Jen Admin a Editor
+// 1. přístup admin a editor
 if (!isset($_SESSION['role']) || ($_SESSION['role'] !== 'admin' && $_SESSION['role'] !== 'editor')) {
     die("Nepovolený přístup.");
 }
@@ -10,7 +10,7 @@ if (!isset($_SESSION['role']) || ($_SESSION['role'] !== 'admin' && $_SESSION['ro
 $res_id = $_GET['res_id'] ?? null;
 if (!$res_id) die("Rezervace nenalezena.");
 
-// 2. Načtení detailů staré rezervace (potřebujeme pro zobrazení "Aktuální let")
+// 2. načtení detailů staré rezervace pro zobrazení "Aktuální let"
 $stmt = $pdo->prepare("SELECT r.*, u.username FROM reservations r JOIN users u ON r.user_id = u.id WHERE r.id = ?");
 $stmt->execute([$res_id]);
 $old_res = $stmt->fetch();
@@ -19,22 +19,22 @@ $old_res = $stmt->fetch();
 $search_to = $_GET['search_to'] ?? '';
 
 // 4. Načtení dostupných letů pro tabulku
-// 4. Načtení dostupných letů pro tabulku (POUZE AKTIVNÍ A BUDOUCÍ)
+// 4. Načtení dostupných letů pro tabulku (POUZE AKTIVNÍ A BUDOUCÍ) oprava
 $sql = "SELECT f.*, a.name as airline_name 
         FROM flights f 
         JOIN airlines a ON f.airline_id = a.id 
         WHERE f.status = 'Aktivní' 
-        AND f.departure_time > NOW()"; // Ukáže jen lety, které ještě neodletěly
+        AND f.departure_time > NOW()"; // aktivni lety podle casu a data
 
 if (!empty($search_to)) {
-    // Používáme připravený parametr pro bezpečnost (quote už máš, tak to zachováme)
+    // připravený parametr pro bezpečnost quote uz je
     $sql .= " AND (f.destination_to LIKE " . $pdo->quote("%$search_to%") . " OR f.destination_from LIKE " . $pdo->quote("%$search_to%") . ")";
 }
 
 $sql .= " ORDER BY f.departure_time ASC";
 $available_flights = $pdo->query($sql)->fetchAll();
 
-// NAČTENÍ HEADERU (už s tvou novou vlaštovkou a designem)
+// naczteni celeho headeru
 include 'includes/header.php';
 ?>
 
@@ -86,31 +86,46 @@ include 'includes/header.php';
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($available_flights as $f): 
-                    $diff = $f['price'] - $old_res['price_paid'];
-                    $diff_color = ($diff > 0) ? "#e53e3e" : "#38a169";
-                ?>
-                    <tr style="border-bottom: 1px solid var(--border);">
-                        <td style="padding: 15px;"><strong><?= htmlspecialchars($f['airline_name']) ?></strong></td>
-                        <td style="padding: 15px;"><?= htmlspecialchars($f['destination_from']) ?> ➔ <?= htmlspecialchars($f['destination_to']) ?></td>
-                        <td style="padding: 15px;"><?= date('d. m. H:i', strtotime($f['departure_time'])) ?></td>
-                        <td style="padding: 15px; font-weight: bold;"><?= number_format($f['price'], 0, ',', ' ') ?> Kč</td>
-                        <td style="padding: 15px; color: <?= $diff_color ?>; font-weight: bold;">
-                            <?= ($diff >= 0 ? "+" : "") . number_format($diff, 0, ',', ' ') ?> Kč
-                        </td>
-                        <td style="padding: 15px; text-align: center;">
-                            <form method="POST" action="actions/save_rebook.php">
-                                <input type="hidden" name="res_id" value="<?= $res_id ?>">
-                                <input type="hidden" name="new_flight_id" value="<?= $f['id'] ?>">
-                                <button type="submit" name="confirm_rebook" class="btn btn-success" 
-                                        style="font-size: 0.85rem;"
-                                        onclick="return confirm('Provést změnu na tento let? Rozdíl: <?= $diff ?> Kč.')">
-                                    Vybrat
-                                </button>
-                            </form>
-                        </td>
-                    </tr>
-                <?php endforeach; ?>
+               <?php foreach ($available_flights as $f): 
+    // Spočítáme rozdíl: Nová cena mínus to, co už zákazník zaplatil
+    $diff = $f['price'] - $old_res['price_paid'];
+    
+    // Nastavíme barvu a text podle toho, zda doplácí nebo vracíme
+    if ($diff > 0) {
+        $diff_color = "#e53e3e"; // Červená pro doplatek
+        $diff_text = "Doplatek: " . number_format($diff, 0, ',', ' ') . " Kč";
+    } elseif ($diff < 0) {
+        $diff_color = "#38a169"; // Zelená pro přeplatek (vratku)
+        $diff_text = "Vratka: " . number_format(abs($diff), 0, ',', ' ') . " Kč"; // abs() odstraní mínusové znaménko
+    } else {
+        $diff_color = "#4a5568"; // Šedá, pokud je cena stejná
+        $diff_text = "Bez doplatku (0 Kč)";
+    }
+?>
+    <tr style="border-bottom: 1px solid var(--border);">
+        <td style="padding: 15px;"><strong><?= htmlspecialchars($f['airline_name']) ?></strong></td>
+        <td style="padding: 15px;"><?= htmlspecialchars($f['destination_from']) ?> ➔ <?= htmlspecialchars($f['destination_to']) ?></td>
+        <td style="padding: 15px;"><?= date('d. m. H:i', strtotime($f['departure_time'])) ?></td>
+        <td style="padding: 15px; font-weight: bold;"><?= number_format($f['price'], 0, ',', ' ') ?> Kč</td>
+        
+        <td style="padding: 15px; color: <?= $diff_color ?>; font-weight: bold; font-size: 0.95rem;">
+            <?= $diff_text ?>
+        </td>
+        
+        <td style="padding: 15px; text-align: center;">
+            <form method="POST" action="actions/save_rebook.php">
+                <input type="hidden" name="res_id" value="<?= $res_id ?>">
+                <input type="hidden" name="new_flight_id" value="<?= $f['id'] ?>">
+                
+                <button type="submit" name="confirm_rebook" class="btn btn-success" 
+                        style="font-size: 0.85rem;"
+                        onclick="return confirm('Provést změnu na tento let? <?= str_replace("'", "\'", $diff_text) ?>.')">
+                    Vybrat
+                </button>
+            </form>
+        </td>
+    </tr>
+<?php endforeach; ?>
             </tbody>
         </table>
         <?php if (empty($available_flights)): ?>

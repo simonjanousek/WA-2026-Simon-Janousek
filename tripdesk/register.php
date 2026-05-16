@@ -35,7 +35,7 @@ if (isset($_GET['error'])) {
             <label style="font-weight: 600;">Heslo:</label>
             <input type="password" name="password" placeholder="••••••••" required style="width:100%; padding: 12px; border-radius: 6px; border: 1px solid #ddd;">
             <small style="color: #718096; display: block; margin-top: 5px; line-height: 1.4;">
-                💡 Musí mít aspoň 8 znaků, obsahovat velké písmeno, číslo a **speciální znak (@, #, $)**.
+                Musí mít aspoň 8 znaků, obsahovat velké písmeno, číslo a **speciální znak (@, #, $)**.
             </small>
         </div>
 

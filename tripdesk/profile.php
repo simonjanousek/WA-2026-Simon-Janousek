@@ -2,7 +2,7 @@
 require_once 'includes/db.php';
 session_start();
 
-// Pokud není přihlášen, šup na login
+// bewz prihlaseni na login
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit();
@@ -11,7 +11,7 @@ if (!isset($_SESSION['user_id'])) {
 $user_id = $_SESSION['user_id'];
 $success_msg = "";
 
-// 1. Načtení aktuálních dat uživatele z DB
+// 1. Načtení aktuálních dat uživatele z db
 $stmt = $pdo->prepare("SELECT * FROM users WHERE id = ?");
 $stmt->execute([$user_id]);
 $user = $stmt->fetch();
@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $new_email = $_POST['email'];
     $new_password = $_POST['password'];
 
-    // Pokud uživatel vyplnil nové heslo, updatujeme i to, jinak jen email
+    // kdyz nove heslo tak update obojiho jinak jen email
     if (!empty($new_password)) {
         $stmt = $pdo->prepare("UPDATE users SET email = ?, password = ? WHERE id = ?");
         $stmt->execute([$new_email, $new_password, $user_id]);
@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->execute([$new_email, $user_id]);
     }
     $success_msg = "Údaje byly úspěšně aktualizovány!";
-    // Znovu načteme data pro zobrazení
+    // nacteni dat pro zobrazeni
     header("Location: profile.php?success=1");
     exit();
 }
@@ -76,4 +76,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 </div>
 
-<?php // Zde pak uzavřeš divy footerem ?>
+<?php //uzavreni footerem ?>

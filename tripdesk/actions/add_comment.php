@@ -3,7 +3,7 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-// 1. OPRAVA CESTY: Skáčeme o úroveň výš do includes
+// 1. OPRAVA CESTY:  o úroveň výš do includes
 require_once __DIR__ . '/../includes/db.php';
 session_start();
 

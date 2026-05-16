@@ -38,12 +38,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SESSION['user_id'])) {
             $logDetails .= " | Změněno jméno cestujícího na: $fname $lname";
         }
 
-        // 3. ZÁPIS DO HISTORIE - Tady se propisuje, KDO to udělal
+        // 3. ZÁPIS DO HISTORIE kdo co udelal
         $logStmt = $pdo->prepare("
             INSERT INTO reservation_history (reservation_id, user_id, action_type, details, created_at) 
             VALUES (?, ?, 'Aktualizace údajů', ?, NOW())
         ");
-        // Posíláme $current_admin_id, aby bylo vidět, že jsi to změnil ty
+        // Posíláme $current_admin_id, aby bylo vidět, že to zmenil admin
         $logStmt->execute([$res_id, $current_admin_id, $logDetails]);
 
         header("Location: ../manage_reservations.php?msg=updated");

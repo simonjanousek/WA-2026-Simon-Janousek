@@ -128,10 +128,10 @@ include 'includes/header.php';
                     <h4 style="color: #718096; margin-top: 0; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px;">🛠 Manažerské nástroje</h4>
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
                         <a href="rebook.php?res_id=<?= $res['id'] ?>" class="btn" style="background: #edf2f7; color: #2d3748; text-decoration: none; text-align: center; padding: 10px; font-size: 0.85rem; border: 1px solid #cbd5e0; border-radius: 8px; font-weight: 600;">
-                            🔄 Rebooking
+                            Rebooking
                         </a>
                         <a href="admin/checkin.php?res_id=<?= $res['id'] ?>" class="btn" style="background: var(--secondary); color: white; text-decoration: none; text-align: center; padding: 10px; font-size: 0.85rem; border-radius: 8px; font-weight: 600;">
-                            ✅ Check-in
+                            Check-in
                         </a>
                     </div>
                 </div>

@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_airline'])) {
                 $target_file = $target_dir . $safe_name;
 
                 if (move_uploaded_file($_FILES["logo_file"]["tmp_name"], $target_file)) {
-                    // Do DB ukládáme POUZE název souboru, cesty pořešíme v kódu
+                    // Do db jen nazev souboru cesty reseny v kodu
                     $logo_db_path = $safe_name;
                 }
             } else {
@@ -131,6 +131,7 @@ $airlines = $pdo->query("SELECT * FROM airlines ORDER BY name ASC")->fetchAll();
                             <td style="padding: 12px;">
     <?php 
         // Pokud cesta v DB začíná na "assets", přidáme jen "../" pro výstup ze složky admin
+        //oprava
         $path = $a['logo']; 
         $final_src = (strpos($path, 'assets/') === 0) ? "../" . $path : "../assets/img/" . $path;
     ?>

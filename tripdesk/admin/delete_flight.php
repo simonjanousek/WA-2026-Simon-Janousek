@@ -2,7 +2,7 @@
 require_once '../includes/db.php';
 session_start();
 
-// Ochrana: Jen admin smí mazat
+// jen admin smí mazat
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
     die("Nepovolený přístup.");
 }

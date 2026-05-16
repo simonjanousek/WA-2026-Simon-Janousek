@@ -3,13 +3,13 @@
 require_once __DIR__ . '/../includes/db.php';
 session_start();
 
-// 1. Ochrana: Jen Admin může mazat
+// 1. jen Admin může mazat
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
     header("Location: ../index.php");
     exit();
 }
 
-// 2. Chytáme parametr 'id'
+// 2. bereme parametr 'id'
 $id = $_GET['id'] ?? null;
 
 if ($id) {

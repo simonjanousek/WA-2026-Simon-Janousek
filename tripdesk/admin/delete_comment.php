@@ -1,11 +1,11 @@
 <?php
 // admin/delete_comment.php
 
-// 1. Načtení databáze (skáčeme z admin o úroveň výš)
+// 1. Načtení databáze (z admin o úroveň výš)
 require_once __DIR__ . '/../includes/db.php';
 session_start();
 
-// 2. Kontrola, zda je uživatel skutečně ADMIN
+// 2.  je uživatel skutečně ADMIN ?
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
     die("Chyba: Nemáte oprávnění k této akci.");
 }

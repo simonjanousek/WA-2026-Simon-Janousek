@@ -2,7 +2,7 @@
 require_once '../includes/db.php';
 session_start();
 
-// 1. Ochrana: Přístup mají jen Admin a Editor
+// 1. přístup mají jen Admin a Editor
 if (!isset($_SESSION['role']) || ($_SESSION['role'] !== 'admin' && $_SESSION['role'] !== 'editor')) {
     die("Nepovolený přístup. Pro tuto akci musíte být personál.");
 }

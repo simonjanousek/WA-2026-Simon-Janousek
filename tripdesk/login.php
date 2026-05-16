@@ -1,9 +1,9 @@
 <?php
-// Jsme v kořenu, cesta je přímá
+// prima cesta - zacatek v korenu
 require_once 'includes/db.php';
 session_start();
 
-// Pokud už je uživatel přihlášen, pošleme ho na hlavní stránku
+// prihlaseny uzivatel na hlavni stranku
 if (isset($_SESSION['user_id'])) {
     header("Location: index.php");
     exit();

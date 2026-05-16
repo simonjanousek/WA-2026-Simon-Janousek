@@ -2,7 +2,7 @@
 require_once '../includes/db.php';
 session_start();
 
-// Ochrana: Jen admin sem může
+// jen admin
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
     die("Nepovolený přístup.");
 }
@@ -91,7 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
 
             <button type="submit" class="btn" style="width: 100%; background: var(--primary); padding: 15px; font-size: 1rem;">
-                🚀 Uložit let do nabídky
+                 Uložit let do nabídky
             </button>
         </form>
     </div>

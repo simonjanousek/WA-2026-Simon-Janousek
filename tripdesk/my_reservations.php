@@ -6,14 +6,14 @@ if (!isset($_SESSION['user_id'])) { header("Location: login.php"); exit(); }
 
 $user_id = $_SESSION['user_id'];
 
-// Načteme rezervace uživatele (propojíme s tabulkou airlines pro název)
+// nacteni rezervace uživatele a propojeni s tabulkou airlines pro název
 $stmt = $pdo->prepare("
     SELECT r.*, a.name as airline_name 
     FROM reservations r 
     JOIN airlines a ON 1=1 -- Zde by v reálu byla vazba na lety, pro zjednodušení teď takto
     WHERE r.user_id = ?
 ");
-// Poznámka: Pro tento příklad předpokládáme, že v reservations máš uložené info o letu
+// v reservation uz ulozene info o letu
 $stmt->execute([$user_id]);
 $reservations = $stmt->fetchAll();
 ?>

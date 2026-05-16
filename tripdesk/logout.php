@@ -1,9 +1,9 @@
 <?php
-session_start(); // Musíme nastartovat, abychom věděli, co čistíme
-session_unset(); // Odstraní všechny proměnné ze session
-session_destroy(); // Úplně zničí session
+session_start(); // zahajit aby bylo co mazat
+session_unset(); // odstraneni vsech promenych ze session
+session_destroy(); // destrukce session
 
-// Přesměrování na hlavní stránku po odhlášení
+// přesměrování na hlavní stránku po odhlášení
 header("Location: index.php");
 exit();
 ?>

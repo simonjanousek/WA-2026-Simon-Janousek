@@ -8,17 +8,17 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// 1. Zachycení filtrů
+// 1. filtry
 $from = $_GET['from'] ?? '';
 $to = $_GET['to'] ?? '';
 $date = $_GET['date'] ?? '';
 
 // --- LOGOVÁNÍ VYHLEDÁVÁNÍ (Pro budoucí analýzu adminem) ---
 if (!empty($from) || !empty($to)) {
-    // Zde by mohl být zápis do tabulky search_logs
+    // pro mozne zapisy do  search_logs a analyzu poptavky
 }
 
-// 2. SQL Dotaz - Sjednocení s logy a aerolinkami
+// 2. SQL Dotaz - sjednoceni s logy a aerolinkami
 $sql = "SELECT f.*, a.id as airline_id, a.name as airline_name, a.logo 
         FROM flights f 
         LEFT JOIN airlines a ON f.airline_id = a.id 
@@ -54,7 +54,7 @@ include 'includes/header.php';
 <div class="container">
     <header style="text-align: center; margin: 40px 0;">
         <h1 style="font-size: 2.5rem; margin-bottom: 10px;">Vyhledávač letů ✈️</h1>
-        <p style="color: #718096; font-size: 1.1rem;">Pro zahájení vyhledáváni vyplňte alespoň jedno pole</p>
+        <p style="color: #718096; font-size: 1.1rem;">Pro zahájení vyhledávání vyplňte alespoň jedno pole</p>
     </header>
 
     <section class="card" style="margin-bottom: 40px; border-top: 4px solid var(--secondary);">
