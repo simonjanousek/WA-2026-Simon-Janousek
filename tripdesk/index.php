@@ -51,6 +51,7 @@ try {
 include 'includes/header.php'; 
 ?>
 
+
 <div class="container">
     <header style="text-align: center; margin: 40px 0;">
         <h1 style="font-size: 2.5rem; margin-bottom: 10px;">Vyhledávač letů ✈️</h1>
